@@ -14,7 +14,7 @@ CREATE TABLE timeslottable (
 
 CREATE TABLE timeTable ( 
     tid int(5) AUTO_INCREMENT PRIMARY KEY NOT NULL, 
-    routeid int,
+    routeid int NOT NULL,
     FOREIGN KEY(routeid) REFERENCES route(routeid),
     slotid int,
     FOREIGN KEY(slotid) REFERENCES timeslottable(slotid),
