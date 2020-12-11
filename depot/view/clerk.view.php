@@ -17,7 +17,7 @@ session_start();
 	$conlis = $clerkObj->giveConductor();
 	$driverlis = $clerkObj->giveDriver();
 	//$ticketbooklist = $clerkObj->giveTicketBook();
-	$timeslot = $clerkObj->giveTimeslot();
+
 
 	if (isset($_POST['add'])) {
 		$feild = $_POST;
@@ -38,25 +38,14 @@ session_start();
 
 	<title>Clerk Dashbord</title>
 </head>
-<body>
+<body style="min-height: 100vh; background: #d3e5e5; ">
 <?php include '../includes/headerpart.php'; ?>
 
-	<main>
+	<main style="min-height: 450px;font-weight: bold;margin: 50px 300px;border: 3px solid #888888;padding-top: 23px;padding-bottom: 23px;border-radius: 38px;box-shadow: 7px 14px 20px #888888;background: rgb(157 157 157 / 36%);">
 
-		<h2>Add New Duty Record</h2>
+		<h2 style="font-family: 'Montserrat-Regular'!important;font-weight: bold;font-size: 42px;text-align: center;">Add New Duty Record</h2>
 		<div>
-			<?php
-				if (isset($_GET['error'])) {
-					if ($_GET['error']=='no') {
-						echo "<p>Add New Duty</p>";
-					}
-					else{
-						echo "<p>Sellect All Values</p>";
-					}
 
-				}
-
-			 ?>
 
 
 		</div>
@@ -70,11 +59,26 @@ session_start();
 			  </div>
 			  <div class="form-group">
 			    <label for="formGroupExampleInput">DESTINATION: </label>
-			    	<select name="desti" id="" style="width:500px;">
+			    	<select name="desti" id="desti" onchange="changeTimeslot(this.value)" style="width:500px;">
 						<option value="0">Select Destination</option>
 						<?php echo $routelis; ?>
 					</select>
 			  </div>
+
+				<script>
+				function changeTimeslot(destination) {
+					var xhttp;
+					xhttp = new XMLHttpRequest();
+					xhttp.onreadystatechange = function() {
+						if (this.readyState == 4 && this.status == 200) {
+							document.getElementById("slotdiv").innerHTML = this.responseText;
+						}
+					};
+					xhttp.open("GET", "../includes/loadTimeSlots.php?destination="+destination, true);
+					xhttp.send();
+
+				}
+				</script>
 			  <div class="form-group">
 			    <label for="formGroupExampleInput">DRIVER: </label>
 			    	<select name="driver" id="" style="width:500px;">
@@ -91,14 +95,25 @@ session_start();
 			  </div>
 
 
-			<label for="">Today is <?php echo date("l"); ?></label>
-			  <div class="form-group">
- 					<label for="appt">Select a Dispatch time:</label>
-  					<select name="timeslot" id="" style="width:500px;">
+			<label for="" style="    font-size: 24px;">Today is <?php echo date("l"); ?></label>
+			  <div id="slotdiv" class="form-group">
+ 					<label for="appt">Select a Time slot:</label>
+  					<select name="timeslot" id="timeslot" style="width:500px;" disabled>
 						<option value="0">Select Time</option>
-						<?php echo $timeslot; ?>
 					</select>
 			  </div>
+				<?php
+					if (isset($_GET['error'])) {
+						if ($_GET['error']=='no') {
+							echo "<p>Add New Duty</p>";
+						}
+						else{
+							echo "<p>Sellect All Values</p>";
+						}
+
+					}
+
+				 ?>
 
 			   <div class="form-group">
 	             <input type="submit" value="AddDuty" name="add" class="btn btn-primary py-2 px-4">
@@ -112,4 +127,7 @@ session_start();
 
 	</main>
 </body>
+<?php
+include "../includes/footerpart.php";
+?>
 </html>

@@ -43,7 +43,7 @@ include "../includes/class-autoload.inc.php";
 		}
 	</style>
 </head>
-<body style="display: grid;grid-template-rows: 73.6px 50px 1fr 171.200px;min-height: 100vh;">
+<body style="display: grid;grid-template-rows: 73.6px 50px 1fr 171.200px;min-height: 100vh; background: #d3e5e5;">
 
   <header style="grid-row: 1;background: #6c757d!important;color: white;font-family: monospace;font-weight: bold;">
     <div class="p-3 mb-2 bg-secondary text-white" style="    margin-bottom: 0px!important;">
@@ -74,11 +74,11 @@ include "../includes/class-autoload.inc.php";
   </div>
 </nav>
 
-  <main class="container-fluid" style="grid-row: 3;display: grid;grid-template-columns:1fr 1fr;margin: 50px auto;width: 82%;border: 3px solid #888888;padding-top: 23px;padding-bottom: 23px;border-radius: 38px;box-shadow: 7px 14px 20px #888888;">
+  <main class="container-fluid" style="grid-row: 3;display: grid;grid-template-columns:1fr 1fr;margin: 50px auto;width: 82%;border: 3px solid #888888;padding-top: 23px;padding-bottom: 23px;border-radius: 38px;box-shadow: 7px 14px 20px #888888;     background: #f1fafa;">
   	<!-- <h2>Horana Depot</h2>
 	<h3>Address</h3><p>No 23,horana Rd,Horana</p>
 	<h3>Contact</h3><p>0333333222</p> -->
-	<div class="container" style="grid-column:1;width: 80%;">
+	<div class="container" style="grid-column:1;width: 80%; border-radius: 27px;">
 		<form action="contactus.php" method="POST">
     <label for="name" >Name</label>
     <input type="text" id="name" name="name" placeholder="Your name.." required>

@@ -138,7 +138,7 @@ class QuerryDAO implements SuperDAO{
 
     // function to update bus table available value
     public function setAvaila($busNO){
-        $sql = 'UPDATE bus SET State = "wating" WHERE busid = ?  LIMIT 1 ';
+        $sql = 'UPDATE bus SET State = "waiting" WHERE busid = ?  LIMIT 1 ';
        $stmt = $this->dbconnection->connect()->prepare($sql);
         $stmt->execute([$busNO]);
     }
@@ -157,7 +157,7 @@ class QuerryDAO implements SuperDAO{
     public function getCon_Driver(){
         // $sql = "SELECT employee.empid, employee.FirstName,employee.Designation ,attendencerecord.available FROM employee INNER JOIN attendencerecord ON employee.empid = attendencerecord.empid WHERE attendencerecord.available = 1" ;
 
-        $sql = "SELECT empid,Designation,FirstName FROM employee WHERE available = 1 ";
+        $sql = "SELECT empid,Designation,FirstName,LastName FROM employee WHERE available = 1 ";
 
         $stmt = $this->dbconnection->connect()->prepare($sql);
         $stmt->execute();
@@ -184,12 +184,12 @@ class QuerryDAO implements SuperDAO{
 
 
     //function to get time slot from time slot
-    public function giveTimes(){
-        $day = date("l");
+    public function giveTimes($day,$destination){
 
-        $sql = 'SELECT slotid,time FROM timeslottable WHERE day = ?';
-       $stmt = $this->dbconnection->connect()->prepare($sql);
-        $stmt->execute([$day]);
+
+        $sql = 'SELECT slotid,time FROM timeslottable natural join timetable where day =? and routeid = ?';
+        $stmt = $this->dbconnection->connect()->prepare($sql);
+        $stmt->execute([$day,$destination]);
         return $stmt;
     }
 

@@ -9,7 +9,6 @@ class dutyRecordDAO implements CrudDAO{
     }
     public function save($savable){
 
-         print_r($savable);
          $bus= $savable->givebus();
          $route= $savable->giveroute();
          $slot= $savable->giveslot();
@@ -21,11 +20,10 @@ class dutyRecordDAO implements CrudDAO{
          $dieselusage= $savable->givedies();
          $cashamount= $savable->givecashamount();
 
-         echo $bus,$route,$slot,$ticketbook,$driver,$conductor,$date,$dispatch,$dieselusage,$cashamount;
 
-        $sql = 'INSERT INTO dutyrecord(busid,routeid,slotid,ticketbookid,driverid,conductorid,`Date`,DispatchTime,dieselusage,CashAmount) VALUES (?,?,?,?,?,?,?,?,?,?)';
+        $sql = 'INSERT INTO dutyrecord(busid,routeid,slotid,driverid,conductorid,`Date`,dieselusage) VALUES (?,?,?,?,?,CURRENT_DATE,?)';
         $stmt = $this->dbconnection->connect()->prepare($sql);
-        $stmt->execute([$bus,$route,$slot,$ticketbook,$driver,$conductor,$date,$dispatch,$dieselusage,$cashamount]);
+        $stmt->execute([$bus,$route,$slot,$driver,$conductor,$dieselusage]);
 
     }
 

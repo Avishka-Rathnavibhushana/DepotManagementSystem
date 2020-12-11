@@ -69,15 +69,16 @@ session_start();
 
 	 ?>
 
-	<main>
+	<main style="display: grid;grid-template-columns: 1fr 1fr; background: #d3e5e5;">
 
-		<label class="switch">
+		<!-- <label class="switch">
 		  <input type="checkbox" id="toggler1" value="yes">
 		   <span class="slider round"></span>
-		</label>
+		</label> -->
 
-		<div><h2>Marking Bus Depature</h2>
-		<form action="transporter.view.php" method="post" style="width:500px;margin-left: 200px;">
+		<div style="grid-column: 1;min-height: 360px;font-weight: bold;margin: 50px 50px;border: 3px solid #888888;padding-top: 23px;padding-bottom: 23px;border-radius: 38px;box-shadow: 7px 14px 20px #888888;background: rgb(157 157 157 / 36%);">
+			<h2 style="    font-family: 'Montserrat-Regular'!important;font-weight: bold;font-size: 42px;text-align: center;">Marking Bus Depature</h2>
+		<form action="transporter.view.php" method="post" style="width:400px;margin-left: 50px; margin-top: 35px;">
 			<div class="form-group">
 			    <label for="formGroupExampleInput">BUS ID: </label>
 			    	<select name="busno" id="dis" style="width:500px;">
@@ -96,15 +97,16 @@ session_start();
 		</div>
 
 
-		<label class="switch">
+		<!-- <label class="switch">
 		  <input type="checkbox" id="toggler2" value="yes">
 		   <span class="slider round"></span>
-		</label>
+		</label> -->
 
 
-		<div><h2>Marking Bus Arrival</h2>
+		<div  style="grid-column: 2;min-height: 360px;font-weight: bold;margin: 50px 50px;border: 3px solid #888888;padding-top: 23px;padding-bottom: 23px;border-radius: 38px;box-shadow: 7px 14px 20px #888888;background: rgb(157 157 157 / 36%);">
+			<h2 style="    font-family: 'Montserrat-Regular'!important;font-weight: bold;font-size: 42px;text-align: center;">Marking Bus Arrival</h2>
 
-		<form action="transporter.view.php" method="post" style="width:500px;margin-left: 200px;">
+		<form action="transporter.view.php" method="post" style="width:300px;margin-left: 50px; margin-top: 35px;">
 			<div class="form-group">
 			    <label for="formGroupExampleInput">BUS ID: </label>
 			    	<select name="busno" id="arr" style="width:500px;">
@@ -133,8 +135,11 @@ session_start();
 
 
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
-<script src="js/transporter.js"></script>
+<!-- <script src="js/transporter.js"></script> -->
 
 
 </body>
+<?php
+include "../includes/footerpart.php";
+?>
 </html>

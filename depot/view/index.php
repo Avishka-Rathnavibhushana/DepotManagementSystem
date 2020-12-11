@@ -121,7 +121,7 @@
             <p style="font-size: 36px;">Our Services</p>
           </div>
           <div style="border-left: 2px solid #1f1f1f; padding: 0px 0px 0px 22px;">
-            <p style="width: 500px; padding: 0px 43px; text-align: center;">To provide the public a safe, dependable and comfortable road passenger transport at a reasonable fare system through a staff dedicated to service and obtain the optimum utilization of all resources functioning as a financially viable organization.</p>
+            <p style="width: 500px; padding: 0px 43px; text-align: center;">There are many ways we can help you. And we are very pleased offer our best service for our passengers. Please leave a comment or if you have any complain please report it through this form.</p>
           </div>
         </div>
       </div>
