@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 16, 2020 at 11:05 AM
+-- Generation Time: Dec 11, 2020 at 06:30 PM
 -- Server version: 10.4.11-MariaDB
 -- PHP Version: 7.4.5
 
@@ -36,16 +36,6 @@ CREATE TABLE `attendancerecord` (
   `available` varchar(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
---
--- Dumping data for table `attendancerecord`
---
-
-INSERT INTO `attendancerecord` (`aid`, `empid`, `Date`, `ontime`, `offtime`, `available`) VALUES
-(1, 4, '2020-11-16', '04:57:42', '00:00:00', '1'),
-(2, 5, '2020-11-16', '05:01:04', '00:00:00', '1'),
-(3, 2, '2020-11-16', '05:01:20', '00:00:00', '1'),
-(4, 6, '2020-11-16', '05:01:24', '00:00:00', '1');
-
 -- --------------------------------------------------------
 
 --
@@ -64,29 +54,29 @@ CREATE TABLE `bus` (
 --
 
 INSERT INTO `bus` (`busid`, `StartDate`, `Numplate`, `State`) VALUES
-(1, '2000-04-20', 'NB1254', 'Parked'),
-(2, '2000-04-20', 'NB3278', 'Parked'),
-(3, '2000-04-20', 'NB4567', 'Parked'),
-(4, '2000-04-20', 'NB1235', 'Parked'),
-(5, '2000-04-20', 'NB9876', 'Parked'),
-(6, '2020-11-15', 'NB2345', 'Parked'),
-(7, '2020-11-15', 'NB2346', 'Parked'),
-(8, '2020-11-15', 'NB2345', 'Parked'),
-(9, '2020-11-15', 'NB2347', 'Parked'),
-(10, '2020-11-15', 'NB2348', 'Parked'),
-(11, '2020-11-15', 'NB2344', 'Parked'),
-(12, '2020-11-15', 'NB2236', 'Parked'),
-(13, '2020-11-15', 'NB1345', 'Parked'),
-(14, '2020-11-15', 'NB2235', 'Parked'),
-(15, '2020-11-15', 'NB2234', 'Parked'),
-(16, '2020-11-15', 'NB2233', 'Parked'),
-(17, '2020-11-15', 'NB2232', 'Parked'),
-(18, '2020-11-15', 'NB2230', 'Parked'),
-(19, '2020-11-15', 'NB2229', 'Parked'),
-(20, '2020-11-15', 'NB2228', 'Parked'),
-(21, '2020-11-15', 'NB2227', 'Parked'),
-(22, '2020-11-15', 'NB2226', 'Parked'),
-(23, '2020-11-15', 'NB2225', 'Parked');
+(1, '2000-04-20', 'NB1254', 'waiting'),
+(2, '2000-04-20', 'NB3278', 'waiting'),
+(3, '2000-04-20', 'NB4567', 'parked'),
+(4, '2000-04-20', 'NB1235', 'parked'),
+(5, '2000-04-20', 'NB9876', 'parked'),
+(6, '2020-11-15', 'NB2345', 'parked'),
+(7, '2020-11-15', 'NB2346', 'parked'),
+(8, '2020-11-15', 'NB2345', 'parked'),
+(9, '2020-11-15', 'NB2347', 'parked'),
+(10, '2020-11-15', 'NB2348', 'parked'),
+(11, '2020-11-15', 'NB2344', 'parked'),
+(12, '2020-11-15', 'NB2236', 'parked'),
+(13, '2020-11-15', 'NB1345', 'parked'),
+(14, '2020-11-15', 'NB2235', 'parked'),
+(15, '2020-11-15', 'NB2234', 'parked'),
+(16, '2020-11-15', 'NB2233', 'parked'),
+(17, '2020-11-15', 'NB2232', 'parked'),
+(18, '2020-11-15', 'NB2230', 'parked'),
+(19, '2020-11-15', 'NB2229', 'parked'),
+(20, '2020-11-15', 'NB2228', 'parked'),
+(21, '2020-11-15', 'NB2227', 'parked'),
+(22, '2020-11-15', 'NB2226', 'parked'),
+(23, '2020-11-15', 'NB2225', 'parked');
 
 -- --------------------------------------------------------
 
@@ -118,9 +108,17 @@ CREATE TABLE `dutyrecord` (
   `conductorid` int(11) DEFAULT NULL,
   `Date` date NOT NULL,
   `DispatchTime` time DEFAULT NULL,
-  `dieselusage` int(11) NOT NULL,
+  `dieselusage` int(11) DEFAULT NULL,
   `CashAmount` float DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `dutyrecord`
+--
+
+INSERT INTO `dutyrecord` (`dutyid`, `busid`, `routeid`, `slotid`, `ticketbookid`, `driverid`, `conductorid`, `Date`, `DispatchTime`, `dieselusage`, `CashAmount`) VALUES
+(18, 2, 1, 37, NULL, 31, 50, '2020-12-11', NULL, 0, NULL),
+(19, 1, 1, 37, NULL, 32, 53, '2020-12-11', NULL, 0, NULL);
 
 -- --------------------------------------------------------
 
@@ -151,11 +149,11 @@ CREATE TABLE `employee` (
 
 INSERT INTO `employee` (`empid`, `FirstName`, `LastName`, `Birthday`, `Gender`, `Address`, `Telephone`, `NIC`, `Designation`, `Email`, `StartDate`, `EndDate`, `IsDeleted`, `Available`) VALUES
 (1, 'Avishka', 'Rathnavibushana', '1998-03-31', 'male', '47,Dias place,Panadura', '0711737706', '980910814V', 'Worker', 'mailavishka@gmail.com', '2020-11-13', NULL, '0', 1),
-(2, 'Sandaru', 'Kaveesha', '1998-06-10', 'male', '45, Mathugama', '0712565486', '980652235V', 'Driver', 'sandaru@gmail.com', '2020-11-13', NULL, '0', 1),
+(2, 'Sandaru', 'Kaveesha', '1998-06-10', 'male', '45, Mathugama', '0712565486', '980652235V', 'Driver', 'sandaru@gmail.com', '2020-11-13', NULL, '0', 0),
 (3, 'Uditha', 'Isuranga', '1997-12-03', 'male', '23, Horan', '0772549526', '980256426V', 'Engineer', 'uditha@gmail.com', '2020-11-13', NULL, '0', 1),
-(4, 'Tharinda', 'Kadanarachchi', '1999-06-10', 'male', '32, Horana', '0762546581', '980125463V', 'Conductor', 'tharinda@gmail.com', '2020-11-13', NULL, '0', 1),
-(5, 'Ashen', 'Shanuka', '1998-06-17', 'male', '23, Wadduwa', '0712565495', '980650325V', 'Conductor', 'ashen@gmail.com', '2020-11-13', NULL, '0', 1),
-(6, 'Isuru', 'Lakmal', '1998-04-01', 'male', '34, Suduwalla', '0712546985', '980910853V', 'Driver', 'isuru@gmail.com', '2020-11-13', NULL, '0', 1),
+(4, 'Tharinda', 'Kadanarachchi', '1999-06-10', 'male', '32, Horana', '0762546581', '980125463V', 'Conductor', 'tharinda@gmail.com', '2020-11-13', NULL, '0', 0),
+(5, 'Ashen', 'Shanuka', '1998-06-17', 'male', '23, Wadduwa', '0712565495', '980650325V', 'Conductor', 'ashen@gmail.com', '2020-11-13', NULL, '0', 0),
+(6, 'Isuru', 'Lakmal', '1998-04-01', 'male', '34, Suduwalla', '0712546985', '980910853V', 'Driver', 'isuru@gmail.com', '2020-11-13', NULL, '0', 0),
 (7, 'Sahan', 'Viduranga', '1998-04-03', 'male', '34, Wadduwa', '0761524358', '980650435V', 'Worker', 'sahan@gmail.com', '2020-11-13', NULL, '0', 1),
 (8, 'Benil', 'Srilal', '1997-06-19', 'male', '23, kalutara', '0714568526', '953265425V', 'Admin', 'mailavishka@gmail.com', '2020-11-13', NULL, '0', 1),
 (9, 'Nandana ', 'Pushpakumara', '1998-07-05', 'male', '7/A, Kurusa handiya', '0761249856', '956954125V', 'Transporter', 'nandana@gmail.com', '2020-11-13', NULL, '0', 1),
@@ -174,44 +172,44 @@ INSERT INTO `employee` (`empid`, `FirstName`, `LastName`, `Birthday`, `Gender`, 
 (22, 'Vishwa', 'Oshada', '1997-02-12', 'male', '12, Horana', '0775436444', '975112455V', 'Worker', 'vishwa@gmail.com', '2020-11-13', NULL, '0', 1),
 (23, 'Avishka', 'Shamendra', '1998-12-05', 'male', '23, Colombo', '0772255485', '965845259V', 'Worker', 'shamendra@gmail.com', '2020-11-13', NULL, '0', 1),
 (24, 'Charuka', 'Rathnayaka', '1997-02-15', 'male', '45, Galle', '0779945888', '975225448V', 'Worker', 'charuka@gmail.com', '2020-11-13', NULL, '0', 1),
-(25, 'Lishan', 'Isuru', '1997-11-04', 'male', '22, Hoarana', '0771645259', '980256415V', 'Driver', 'maillishan@gmail.com', '2020-11-13', NULL, '0', 1),
-(26, 'Lishan', 'Isuru', '1998-10-04', 'male', '32, Panadura', '0771645259', '980256415V', 'Driver', 'maillishan@gmail.com', '2020-01-01', NULL, '0', 1),
-(27, 'Maleesha', 'Dilshan', '1998-05-24', 'male', '22, Hoarana', '0771645259', '980256415V', 'Driver', 'maillishan@gmail.com', '2020-01-01', NULL, '0', 1),
-(28, 'Milindu', 'Malshan', '1997-01-21', 'male', '12, Bandaraga', '0771645259', '980256415V', 'Driver', 'maillishan@gmail.com', '2020-01-01', NULL, '0', 1),
-(29, 'Nipun', 'Deelaka', '1998-01-21', 'male', '9, Ingiriya', '0771645259', '980256415V', 'Driver', 'maillishan@gmail.com', '2020-01-01', NULL, '0', 1),
-(30, 'Nisal', 'Senadeera', '1999-10-11', 'male', '45, Kalutara', '0771645259', '980256415V', 'Driver', 'maillishan@gmail.com', '2020-01-01', NULL, '0', 1),
-(31, 'Pramod', 'Fonseka', '1999-10-11', 'male', '56, Nalluruwa', '0771645259', '980256415V', 'Driver', 'maillishan@gmail.com', '2020-01-01', NULL, '0', 1),
-(32, 'Prasanna', 'Rangajith', '1997-06-30', 'male', '15, Walana', '0771645259', '980256415V', 'Driver', 'maillishan@gmail.com', '2020-01-01', NULL, '0', 1),
-(33, 'Randil', 'Ashen', '1997-06-30', 'male', '43, Walapala', '0771645259', '980256415V', 'Driver', 'maillishan@gmail.com', '2020-01-01', NULL, '0', 1),
+(25, 'Lishan', 'Isuru', '1997-11-04', 'male', '22, Hoarana', '0771645259', '980256415V', 'Driver', 'maillishan@gmail.com', '2020-11-13', NULL, '0', 0),
+(26, 'Lishan', 'Isuru', '1998-10-04', 'male', '32, Panadura', '0771645259', '980256415V', 'Driver', 'maillishan@gmail.com', '2020-01-01', NULL, '0', 0),
+(27, 'Maleesha', 'Dilshan', '1998-05-24', 'male', '22, Hoarana', '0771645259', '980256415V', 'Driver', 'maillishan@gmail.com', '2020-01-01', NULL, '0', 0),
+(28, 'Milindu', 'Malshan', '1997-01-21', 'male', '12, Bandaraga', '0771645259', '980256415V', 'Driver', 'maillishan@gmail.com', '2020-01-01', NULL, '0', 0),
+(29, 'Nipun', 'Deelaka', '1998-01-21', 'male', '9, Ingiriya', '0771645259', '980256415V', 'Driver', 'maillishan@gmail.com', '2020-01-01', NULL, '0', 0),
+(30, 'Nisal', 'Senadeera', '1999-10-11', 'male', '45, Kalutara', '0771645259', '980256415V', 'Driver', 'maillishan@gmail.com', '2020-01-01', NULL, '0', 0),
+(31, 'Pramod', 'Fonseka', '1999-10-11', 'male', '56, Nalluruwa', '0771645259', '980256415V', 'Driver', 'maillishan@gmail.com', '2020-01-01', NULL, '0', 0),
+(32, 'Prasanna', 'Rangajith', '1997-06-30', 'male', '15, Walana', '0771645259', '980256415V', 'Driver', 'maillishan@gmail.com', '2020-01-01', NULL, '0', 0),
+(33, 'Randil', 'Ashen', '1997-06-30', 'male', '43, Walapala', '0771645259', '980256415V', 'Driver', 'maillishan@gmail.com', '2020-01-01', NULL, '0', 0),
 (34, 'Rumal', 'Pethangoda', '1999-06-30', 'male', '12, Bandaraga', '0771645259', '980256415V', 'Driver', 'maillishan@gmail.com', '2020-01-01', NULL, '0', 1),
 (35, 'Sadun', 'Nimshan', '1999-08-30', 'male', '56, Nalluruwa', '0771645259', '980256415V', 'Driver', 'maillishan@gmail.com', '2020-01-01', NULL, '0', 1),
-(36, 'Sakuntha', 'Dilshan', '1999-10-24', 'male', '56, Nalluruwa', '0771645259', '980256415V', 'Driver', 'maillishan@gmail.com', '2020-01-01', NULL, '0', 1),
-(37, 'Sithum', 'Amalka', '1999-10-23', 'male', '458, Bandaragama', '0771645259', '980256415V', 'Driver', 'maillishan@gmail.com', '2020-01-01', NULL, '0', 1),
+(36, 'Sakuntha', 'Dilshan', '1999-10-24', 'male', '56, Nalluruwa', '0771645259', '980256415V', 'Driver', 'maillishan@gmail.com', '2020-01-01', NULL, '0', 0),
+(37, 'Sithum', 'Amalka', '1999-10-23', 'male', '458, Bandaragama', '0771645259', '980256415V', 'Driver', 'maillishan@gmail.com', '2020-01-01', NULL, '0', 0),
 (38, 'Pasindu', 'Nelaka', '1999-02-23', 'male', '12, Panadura', '0771645259', '980256415V', 'Driver', 'maillishan@gmail.com', '2020-01-01', NULL, '0', 1),
-(39, 'Yohan', 'Deelak', '1998-02-23', 'male', '42, Bandaraga', '0771645259', '980256415V', 'Driver', 'maillishan@gmail.com', '2020-01-01', NULL, '0', 1),
+(39, 'Yohan', 'Deelak', '1998-02-23', 'male', '42, Bandaraga', '0771645259', '980256415V', 'Driver', 'maillishan@gmail.com', '2020-01-01', NULL, '0', 0),
 (40, 'Sithul', 'Deshan', '1998-06-30', 'male', '32, Nalluruwa', '0771645259', '980256415V', 'Driver', 'maillishan@gmail.com', '2020-01-01', NULL, '0', 1),
 (41, 'Tharindu', 'Kosala', '1998-06-30', 'male', '45, Horana', '0771645259', '980256415V', 'Driver', 'maillishan@gmail.com', '2020-01-01', NULL, '0', 1),
 (42, 'Tharuka', 'Shenal', '1998-06-04', 'male', '65, Horana', '0771645259', '980256415V', 'Driver', 'maillishan@gmail.com', '2020-01-01', NULL, '0', 1),
 (43, 'Thavindu', 'Keshan', '1998-02-04', 'male', '5, Horana', '0771645259', '980256415V', 'Driver', 'maillishan@gmail.com', '2020-01-01', NULL, '0', 1),
 (44, 'Tishan', 'Ravishanka', '1998-05-04', 'male', '45, Panadura', '0771645259', '980256415V', 'Driver', 'maillishan@gmail.com', '2020-01-01', NULL, '0', 1),
 (45, 'Thisal', 'Nimnaka', '1998-05-04', 'male', '45, Walana', '0771645259', '980256415V', 'Driver', 'maillishan@gmail.com', '2020-01-01', NULL, '0', 1),
-(46, 'Sadun', 'Kavinda', '1998-09-04', 'male', '22, Hoarana', '0771645259', '980256415V', 'Conductor', 'maillishan@gmail.com', '2020-01-01', NULL, '0', 1),
-(47, 'Gayan', 'Danushka', '1998-09-14', 'male', '22, Hoarana', '0771645259', '980256415V', 'Conductor', 'maillishan@gmail.com', '2020-01-01', NULL, '0', 1),
-(48, 'Dushan', 'Sadaru', '1998-09-24', 'male', '22, Hoarana', '0771645259', '980256415V', 'Conductor', 'maillishan@gmail.com', '2020-01-01', NULL, '0', 1),
-(49, 'Lahiru', 'Sampath', '1998-09-04', 'male', '22, Hoarana', '0771645259', '980256415V', 'Conductor', 'maillishan@gmail.com', '2020-01-01', NULL, '0', 1),
-(50, 'Mihira', 'Dilshan', '1998-02-04', 'male', '22, Hoarana', '0771645259', '980256415V', 'Conductor', 'maillishan@gmail.com', '2020-01-01', NULL, '0', 1),
-(51, 'Achala', 'Sulakshana', '1998-02-04', 'male', '22, Hoarana', '0771645259', '980256415V', 'Conductor', 'maillishan@gmail.com', '2020-01-01', NULL, '0', 1),
-(52, 'Dulan', 'Santhush', '1999-10-23', 'male', '22, Hoarana', '0771645259', '980256415V', 'Conductor', 'maillishan@gmail.com', '2020-01-01', NULL, '0', 1),
-(53, 'Geeth', 'De mel', '1998-06-30', 'male', '22, Hoarana', '0771645259', '980256415V', 'Conductor', 'maillishan@gmail.com', '2020-01-01', NULL, '0', 1),
-(54, 'Hasala', 'Nimnaka', '1998-09-14', 'male', '22, Hoarana', '0771645259', '980256415V', 'Conductor', 'maillishan@gmail.com', '2020-01-01', NULL, '0', 1),
+(46, 'Sadun', 'Kavinda', '1998-09-04', 'male', '22, Hoarana', '0771645259', '980256415V', 'Conductor', 'maillishan@gmail.com', '2020-01-01', NULL, '0', 0),
+(47, 'Gayan', 'Danushka', '1998-09-14', 'male', '22, Hoarana', '0771645259', '980256415V', 'Conductor', 'maillishan@gmail.com', '2020-01-01', NULL, '0', 0),
+(48, 'Dushan', 'Sadaru', '1998-09-24', 'male', '22, Hoarana', '0771645259', '980256415V', 'Conductor', 'maillishan@gmail.com', '2020-01-01', NULL, '0', 0),
+(49, 'Lahiru', 'Sampath', '1998-09-04', 'male', '22, Hoarana', '0771645259', '980256415V', 'Conductor', 'maillishan@gmail.com', '2020-01-01', NULL, '0', 0),
+(50, 'Mihira', 'Dilshan', '1998-02-04', 'male', '22, Hoarana', '0771645259', '980256415V', 'Conductor', 'maillishan@gmail.com', '2020-01-01', NULL, '0', 0),
+(51, 'Achala', 'Sulakshana', '1998-02-04', 'male', '22, Hoarana', '0771645259', '980256415V', 'Conductor', 'maillishan@gmail.com', '2020-01-01', NULL, '0', 0),
+(52, 'Dulan', 'Santhush', '1999-10-23', 'male', '22, Hoarana', '0771645259', '980256415V', 'Conductor', 'maillishan@gmail.com', '2020-01-01', NULL, '0', 0),
+(53, 'Geeth', 'De mel', '1998-06-30', 'male', '22, Hoarana', '0771645259', '980256415V', 'Conductor', 'maillishan@gmail.com', '2020-01-01', NULL, '0', 0),
+(54, 'Hasala', 'Nimnaka', '1998-09-14', 'male', '22, Hoarana', '0771645259', '980256415V', 'Conductor', 'maillishan@gmail.com', '2020-01-01', NULL, '0', 0),
 (55, 'Hasindu', 'Lakshan', '1999-10-23', 'male', '22, Hoarana', '0771645259', '980256415V', 'Conductor', 'maillishan@gmail.com', '2020-01-01', NULL, '0', 1),
 (56, 'Kavindu', 'Kavinda', '1999-10-23', 'male', '22, Hoarana', '0771645259', '980256415V', 'Conductor', 'maillishan@gmail.com', '2020-01-01', NULL, '0', 1),
 (57, 'Mahima', 'Sampath', '1998-02-04', 'male', '22, Hoarana', '0771645259', '980256415V', 'Conductor', 'maillishan@gmail.com', '2020-01-01', NULL, '0', 1),
-(58, 'Noshan', 'Viduranga', '1999-02-23', 'male', '22, Hoarana', '0771645259', '980256415V', 'Conductor', 'maillishan@gmail.com', '2020-01-01', NULL, '0', 1),
+(58, 'Noshan', 'Viduranga', '1999-02-23', 'male', '22, Hoarana', '0771645259', '980256415V', 'Conductor', 'maillishan@gmail.com', '2020-01-01', NULL, '0', 0),
 (59, 'Pasindu', 'Rashan', '1998-09-14', 'male', '22, Hoarana', '0771645259', '980256415V', 'Conductor', 'maillishan@gmail.com', '2020-01-01', NULL, '0', 1),
 (60, 'Ravindu', 'Sasanka', '1998-09-14', 'male', '22, Hoarana', '0771645259', '980256415V', 'Conductor', 'maillishan@gmail.com', '2020-01-01', NULL, '0', 1),
 (61, 'Sangeeth', 'Peiris', '1998-09-14', 'male', '22, Hoarana', '0771645259', '980256415V', 'Conductor', 'maillishan@gmail.com', '2020-01-01', NULL, '0', 1),
-(62, 'Sasitha', 'Lakmal', '1998-09-14', 'male', '22, Hoarana', '0771645259', '980256415V', 'Conductor', 'maillishan@gmail.com', '2020-01-01', NULL, '0', 1),
+(62, 'Sasitha', 'Lakmal', '1998-09-14', 'male', '22, Hoarana', '0771645259', '980256415V', 'Conductor', 'maillishan@gmail.com', '2020-01-01', NULL, '0', 0),
 (63, 'Thilan', 'Meegoda', '1998-02-04', 'male', '22, Hoarana', '0771645259', '980256415V', 'Conductor', 'maillishan@gmail.com', '2020-01-01', NULL, '0', 1),
 (64, 'Ushan', 'Isuranga', '1998-09-14', 'male', '22, Hoarana', '0771645259', '980256415V', 'Conductor', 'maillishan@gmail.com', '2020-01-01', NULL, '0', 1),
 (65, 'Kushan', 'Ravintha', '1998-02-04', 'male', '22, Hoarana', '0771645259', '980256415V', 'Conductor', 'maillishan@gmail.com', '2020-01-01', NULL, '0', 1),
@@ -300,6 +298,21 @@ CREATE TABLE `salary` (
   `HourOt` int(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Dumping data for table `salary`
+--
+
+INSERT INTO `salary` (`sid`, `Designation`, `DaySal`, `HourOt`) VALUES
+(1, 'Admin', 3000, 800),
+(2, 'Engineer', 2340, 700),
+(3, 'Cashier', 1670, 500),
+(4, 'Transporter', 1670, 500),
+(5, 'Driver', 1340, 400),
+(6, 'Worker', 1340, 400),
+(7, 'Clerk', 1000, 200),
+(8, 'Security', 1000, 200),
+(9, 'Conductor', 1000, 200);
+
 -- --------------------------------------------------------
 
 --
@@ -372,7 +385,33 @@ INSERT INTO `timeslottable` (`slotid`, `day`, `time`) VALUES
 (30, 'Sunday', '10:00:00'),
 (31, 'Sunday', '13:00:00'),
 (32, 'Sunday', '14:00:00'),
-(33, 'Sunday', '15:00:00');
+(33, 'Sunday', '15:00:00'),
+(34, 'Monday', '17:00:00'),
+(35, 'Monday', '18:00:00'),
+(36, 'Monday', '20:00:00'),
+(37, 'Friday', '16:00:00'),
+(38, 'Friday', '18:00:00'),
+(39, 'Friday', '20:00:00'),
+(40, 'Friday', '21:00:00'),
+(41, 'Friday', '23:00:00'),
+(42, 'Friday', '23:00:00'),
+(43, 'Saturday', '08:00:00'),
+(44, 'Saturday', '10:00:00'),
+(45, 'Saturday', '12:00:00'),
+(46, 'Saturday', '16:00:00'),
+(47, 'Saturday', '18:00:00'),
+(48, 'Saturday', '20:00:00'),
+(49, 'Saturday', '23:00:00'),
+(50, 'Sunday', '11:00:00'),
+(51, 'Sunday', '17:00:00'),
+(52, 'Sunday', '19:00:00'),
+(53, 'Sunday', '20:00:00'),
+(54, 'Sunday', '22:00:00'),
+(55, 'Sunday', '11:00:00'),
+(56, 'Tuesday', '11:00:00'),
+(57, 'Tuesday', '16:00:00'),
+(58, 'Tuesday', '19:00:00'),
+(59, 'Tuesday', '21:00:00');
 
 -- --------------------------------------------------------
 
@@ -383,9 +422,24 @@ INSERT INTO `timeslottable` (`slotid`, `day`, `time`) VALUES
 CREATE TABLE `timetable` (
   `tid` int(5) NOT NULL,
   `routeid` int(11) DEFAULT NULL,
-  `slotid` int(11) DEFAULT NULL,
-  `status` varchar(15) NOT NULL
+  `slotid` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `timetable`
+--
+
+INSERT INTO `timetable` (`tid`, `routeid`, `slotid`) VALUES
+(1, 1, 1),
+(2, 2, 3),
+(5, 15, 8),
+(6, 25, 9),
+(7, 25, 15),
+(8, 20, 12),
+(9, 1, 33),
+(10, 20, 51),
+(11, 1, 37),
+(12, 2, 22);
 
 -- --------------------------------------------------------
 
@@ -526,7 +580,7 @@ ALTER TABLE `workerassign`
 -- AUTO_INCREMENT for table `attendancerecord`
 --
 ALTER TABLE `attendancerecord`
-  MODIFY `aid` int(15) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `aid` int(15) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `bus`
@@ -544,7 +598,7 @@ ALTER TABLE `complain`
 -- AUTO_INCREMENT for table `dutyrecord`
 --
 ALTER TABLE `dutyrecord`
-  MODIFY `dutyid` int(15) NOT NULL AUTO_INCREMENT;
+  MODIFY `dutyid` int(15) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
 -- AUTO_INCREMENT for table `employee`
@@ -568,19 +622,19 @@ ALTER TABLE `route`
 -- AUTO_INCREMENT for table `salary`
 --
 ALTER TABLE `salary`
-  MODIFY `sid` int(3) NOT NULL AUTO_INCREMENT;
+  MODIFY `sid` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `timeslottable`
 --
 ALTER TABLE `timeslottable`
-  MODIFY `slotid` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
+  MODIFY `slotid` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=60;
 
 --
 -- AUTO_INCREMENT for table `timetable`
 --
 ALTER TABLE `timetable`
-  MODIFY `tid` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `tid` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT for table `userlist`

@@ -23,7 +23,7 @@ $showAll =  $timetableCtrl->execute("All");
 
 	<title>Time Table</title>
 </head>
-<body style="display: grid;grid-template-rows: 73.6px 50px 1fr 171.200px;min-height: 100vh;">
+<body style="display: grid;grid-template-rows: 73.6px 50px 1fr 171.200px;min-height: 100vh; background: #d3e5e5; ">
 
   <header style="grid-row: 1;background: #6c757d!important;color: white;font-family: monospace;font-weight: bold;">
     <div class="p-3 mb-2 bg-secondary text-white" style="    margin-bottom: 0px!important;">
@@ -54,7 +54,7 @@ $showAll =  $timetableCtrl->execute("All");
 	  </div>
 	</nav>
 
-	<main  style="grid-row: 3;    margin: 22px 0px;">
+	<main  style="grid-row: 3;     min-height: 450px;margin: 50px 100px;text-align: center;border: 3px solid #888888;padding-top: 23px;padding-bottom: 23px;border-radius: 38px;box-shadow: 7px 14px 20px #888888;background: #f1fafa;">
 		<div class="row" style="margin-left: 30px;margin-right: 0px;">
 	      <form class="form-inline" action="#">
 	        <label for="" style="margin-right: 20px;">Find Your Way</label>

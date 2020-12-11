@@ -48,7 +48,7 @@ class ClerkControl implements Facademaker{
 
 				if ($row['Designation'] == 'Conductor') {
 
-					$opt.= "<option value=\"{$row['empid']}\">{$row['FirstName']}</option>";
+					$opt.= "<option value=\"{$row['empid']}\">{$row['FirstName']}  {$row['LastName']}</option>";
 				}
 
 		}
@@ -62,7 +62,7 @@ class ClerkControl implements Facademaker{
 
 		while($row = $out->fetch()){
 				if ($row['Designation'] == 'Driver') {
-					$opt.= "<option value=\"{$row['empid']}\">{$row['FirstName']}</option>";
+					$opt.= "<option value=\"{$row['empid']}\">{$row['FirstName']} {$row['LastName']}</option>";
 				}
 
 		}
@@ -92,10 +92,10 @@ class ClerkControl implements Facademaker{
 	}
 
 	//give correct time slot
-	public function giveTimeslot(){
+	public function giveTimeslot($day,$destination){
 		$opt = '';
 
-		$out = $this->querryDAO->giveTimes();
+		$out = $this->querryDAO->giveTimes($day,$destination);
 		while($row = $out->fetch()){
 				$opt.= "<option value=\"{$row['slotid']}\">{$row['time']}</option>";
 		}
@@ -106,7 +106,7 @@ class ClerkControl implements Facademaker{
 	//check field is not empty
 	public function checkEmpty($feild){
 		foreach ($feild as $value) {
-			if (empty($value)) {
+			if (empty($value) or $value=="Select Bus" or $value=="Select Destination" or $value=="Select Driver" or $value=="Select Conductor" or $value=="Select Time" or $value== null) {
 				return true;
 			}
 		}

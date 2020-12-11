@@ -175,7 +175,7 @@ $adminkObj = $factory->getController("ADMIN");
   if (isset($_POST['check'])){
     if($_POST['StartDate']==null){$_POST['StartDate']=Date("Y/M/D");}
     if(isset($_POST['submit'])){
-      $employee=new EmployeeDTO("",$_POST['FirstName'],$_POST['LastName'],$_POST['NIC'],$_POST['Address'],$_POST['Gender'],$_POST['Birthday'],$_POST['Telephone'],$_POST['Designation'],$_POST['Email'],$_POST['StartDate'],null,0,1);
+      $employee=new EmployeeDTO("",$_POST['FirstName'],$_POST['LastName'],$_POST['NIC'],$_POST['Address'],$_POST['Gender'],$_POST['Birthday'],$_POST['Telephone'],$_POST['Designation'],$_POST['Email'],$_POST['StartDate'],null,0,0);
 
       $adminkObj->addnew_employee($employee);
     }

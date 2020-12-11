@@ -22,6 +22,8 @@ $showTable =  $timetableCtrl->execute("Now");
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
   <link rel="stylesheet" href="css/styles.css">
 
 	<title>Welcome SLTB</title>
@@ -57,12 +59,12 @@ $showTable =  $timetableCtrl->execute("Now");
   </div>
 </nav>
 
-  <main style="grid-row: 3;">
+  <main style="grid-row: 3;     min-height: 450px; margin: 50px 150px;text-align: center;border: 3px solid #888888;padding-bottom: 23px;border-radius: 38px;box-shadow: 7px 14px 20px #888888;background: #f1fafa;">
 
 
   		<!-- dynamic time table -->
  <div class="container" style="margin-top: 10px;">
-      <h2><?php echo $today; ?> Timetable</h2>
+      <h2 style="    font-size: 40px;font-family: cursive;font-weight: bold;color: #5e6167;"><?php echo $today; ?> Timetable</h2>
       <table class="table table-bordered">
         <thead>
           <tr>
@@ -84,8 +86,7 @@ $showTable =  $timetableCtrl->execute("Now");
   </main>
 
 
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
 
   <footer style="grid-row: 4;background:#343a40!important;color: white;">
   <div style="position:relative;bottom:0px;width:100%;margin-bottom: 0px!important;" class="p-3 mb-2 bg-dark text-white">
