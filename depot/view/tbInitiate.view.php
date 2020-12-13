@@ -170,6 +170,7 @@
                       document.getElementById("err").innerHTML = "<p>Select a record</p>";
                     }else{
                       document.getElementById("err").innerHTML = "";
+                      console.log("sdg");
                       xhttp = new XMLHttpRequest();
                       xhttp.onreadystatechange = function() {
                         if (this.readyState == 4 && this.status == 200) {

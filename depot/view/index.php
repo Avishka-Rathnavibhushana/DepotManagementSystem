@@ -16,6 +16,14 @@
   <link rel="stylesheet" href="css/styles.css">
 
 	<title>Welcome SLTB</title>
+  <style>
+    button{
+      background-color: #0da772!important;
+    }
+    button:hover{
+      background-color: #80b280!important;
+    }
+  </style>
 </head>
 <body style="display: grid;grid-template-rows: 73.6px 50px 1fr 171.200px;min-height: 100vh;">
 
@@ -107,7 +115,7 @@
       <div style="margin: 22px 106.63px 60px 46.6px;">
         <div style="display: flex; background: azure; padding: 15px 30px 15px 30px; border: 1px solid #7a3737; box-shadow: -6px -3px 20px 0px #756a6a;">
           <div style="border-right: 2px solid #1f1f1f; padding: 0px 22px 0px 0px;">
-            <p style="width: 600px; padding: 0px 43px; text-align: center;">To provide the public a safe, dependable and comfortable road passenger transport at a reasonable fare system through a staff dedicated to service and obtain the optimum utilization of all resources functioning as a financially viable organization.</p>
+            <p style="width: 600px; padding: 0px 43px; text-align: center;">In a time where people have lots of issues with public trasportation system and public services, our mission is to encourage our passengers to use public transport with our buses very easily with new technology. Anyone can find easily about all the busses and time table of the depot easily n our site.</p>
           </div>
           <div style="width: 100%; text-align: center; margin: auto;">
             <p style="font-size: 36px;">Our Mission</p>
@@ -115,13 +123,48 @@
         </div>
       </div>
 
-      <div style="margin: 22px 46.63px 60px 106.6px;">
+      <div style="margin: 22px 46.63px 25px 106.6px;">
         <div style="display: flex; background: azure; padding: 15px 30px 15px 30px; border: 1px solid #7a3737; box-shadow: -6px -3px 20px 0px #756a6a;">
           <div style="width: 100%; text-align: center; margin: auto;">
             <p style="font-size: 36px;">Our Services</p>
           </div>
           <div style="border-left: 2px solid #1f1f1f; padding: 0px 0px 0px 22px;">
-            <p style="width: 500px; padding: 0px 43px; text-align: center;">There are many ways we can help you. And we are very pleased offer our best service for our passengers. Please leave a comment or if you have any complain please report it through this form.</p>
+            <p style="width: 500px; padding: 0px 43px; text-align: center;">We Horana depot ensures that people who seeks our sevices will get the services of our depot very easily. In this virtual platform of the Horana bus depot you can see sevices like daily time table and findind a bus time of your desired destination in a second. We are happy to say that you can get our services very easily from this platform.</p>
+          </div>
+        </div>
+      </div>
+
+      <div style="display:flex">
+        <div style="margin: 0px 50px 35px 183.6px;    width: 50%;">
+          <div style="display: block; background: azure; padding: 15px 30px 15px 30px; border: 1px solid #7a3737; box-shadow: -6px -3px 20px 0px #756a6a;">
+            <div style="width: 100%; text-align: center; margin: auto;">
+              <p style="font-size: 36px;">Daily Time Table</p>
+            </div>
+            <div >
+              <img src="img/timetable.jpg" style="width:100%; height: 100%; border-top: 2px solid #1f1f1f; padding: 14px 0px 0px 0px;">
+            </div>
+            <div style="padding: 14px 0px 0px 0px;">
+              <p style=" padding: 0px 43px; text-align: center;">Through this page you can find all the available bus destinations and departing times of each bus on the respective day. You can use this page to find any bus departing the depot daily.</p>
+            </div>
+            <center>
+              <button id="btn1" class="btn btn-success">Daily Time Table</button>
+            </center>
+          </div>
+        </div>
+        <div style="margin: 0px 98.63px 35px 50px;    width: 50%;">
+          <div style="display: block; background: azure; padding: 15px 30px 15px 30px; border: 1px solid #7a3737; box-shadow: -6px -3px 20px 0px #756a6a;">
+            <div style="width: 100%; text-align: center; margin: auto;">
+              <p style="font-size: 36px;">Find your way</p>
+            </div>
+            <div >
+              <img src="img/search1.png" style="width:100%; height: 100%; border-top: 2px solid #1f1f1f; padding: 14px 0px 0px 0px;">
+            </div>
+            <div style="padding: 14px 0px 0px 0px;">
+              <p style=" padding: 0px 43px; text-align: center;">This page will show you all the bus destinations which will depart from horana depot and their times. Find your way offers you the ability to search your destination and it will propt you all the respective deprting times of the bus related to a certain destination.</p>
+            </div>
+            <center>
+              <button id="btn2" class="btn btn-success" type="submit">Find Your Way</button>
+            </center>
           </div>
         </div>
       </div>
@@ -129,7 +172,10 @@
       <div style="margin: 22px 106.63px 60px 46.6px;">
         <div style="display: flex; background: azure; padding: 15px 30px 15px 30px; border: 1px solid #7a3737; box-shadow: -6px -3px 20px 0px #756a6a;">
           <div style="border-right: 2px solid #1f1f1f; padding: 0px 22px 0px 0px;">
-            <p style="width: 500px; padding: 0px 43px; text-align: center;">To provide the public a safe, dependable and comfortable road passenger transport at a reasonable fare system through a staff dedicated to service and obtain the optimum utilization of all resources functioning as a financially viable organization.</p>
+            <p style="width: 500px; padding: 0px 43px; text-align: center;">There are many ways we can help you. And we are very pleased offer our best service for our passengers. Please leave a comment or if you have any complain please report it using our contact form section.</p>
+            <center>
+              <button id="btn3" class="btn btn-success" type="submit">Contact Us</button>
+            </center>
           </div>
           <div style="width: 100%; text-align: center; margin: auto;">
             <p style="font-size: 36px;">Contact Us</p>
@@ -142,7 +188,17 @@
 
   </main>
 
-
+  <script type="text/javascript">
+      document.getElementById("btn1").onclick = function () {
+          location.href = "todaytimetable.view.php";
+      };
+      document.getElementById("btn2").onclick = function () {
+          location.href = "timetable.view.php";
+      };
+      document.getElementById("btn3").onclick = function () {
+          location.href = "contactus.php";
+      };
+  </script>
 
   <footer style="grid-row: 4;background:#343a40!important;color: white;">
   <div style="position:relative;bottom:0px;width:100%;margin-bottom: 0px!important;" class="p-3 mb-2 bg-dark text-white">

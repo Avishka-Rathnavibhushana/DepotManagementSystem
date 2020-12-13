@@ -68,10 +68,11 @@ $showTable =  $timetableCtrl->execute("Now");
       <table class="table table-bordered">
         <thead>
           <tr>
-            <th>Destination</th>
-            <th>Start time</th>
-            <th>Current State</th>
-            <th>Route</th>
+            <th style="text-align: center;">Destination</th>
+            <th style="text-align: center;">Dispatch time</th>
+            <th style="text-align: center;">State</th>
+            <th style="text-align: center;">Route</th>
+
           </tr>
         </thead>
         <tbody>

@@ -27,7 +27,7 @@ class QuerryDAO implements SuperDAO{
 
         if ($disP) {
             // $sql = 'SELECT dutyrecordnew.busid ,bus.numplate FROM dutyrecordnew INNER JOIN bus ON dutyrecordnew.busid = bus.busid WHERE dutyrecordnew.state = "wating"';
-            $sql = 'SELECT busid,Numplate FROM bus WHERE State = "wating"';
+            $sql = 'SELECT busid,Numplate FROM bus WHERE State = "ready"';
         }else{
             // $sql = 'SELECT dutyrecordnew.busid ,bus.numplate FROM dutyrecordnew INNER JOIN bus ON dutyrecordnew.busid = bus.busid WHERE dutyrecordnew.state = "dispatched"';
             $sql = 'SELECT busid,Numplate FROM bus WHERE State = "dispatched"';
@@ -41,10 +41,10 @@ class QuerryDAO implements SuperDAO{
     public function markDis($busno,$diesel){
         date_default_timezone_set("Asia/Colombo");
         $timenow = date("H:i:s");
-        $date1 = date("Y/m/d");
-        $sql = 'UPDATE dutyrecordnew SET  dieselusage = ? , DispatchTime = ? WHERE busid = ? AND Date = date1';
+        $date1 = date("Y-m-d");
+        $sql = 'UPDATE dutyrecord SET  dieselusage = ? , DispatchTime = ? WHERE busid = ? AND Date = ?';
        $stmt = $this->dbconnection->connect()->prepare($sql);
-        $stmt->execute([$diesel,$timenow,$busno]);
+        $stmt->execute([$diesel,$timenow,$busno,$date1]);
 
         $this->changeBusSate("markDis",$busno);
 
@@ -82,7 +82,7 @@ class QuerryDAO implements SuperDAO{
     //------------------Time table----------//
 
     public function todaySchedule($day){
-        $sql = "SELECT route.routeid,timeslottable.slotid,timetable.status,timeslottable.time,route.RouteName,route.Description FROM ((timetable INNER JOIN timeslottable ON timetable.slotid = timeslottable.slotid) INNER JOIN route ON timetable.routeid = route.routeid) WHERE timeslottable.day = ?";
+        $sql = "SELECT route.routeid,timeslottable.slotid,timeslottable.time,route.RouteName,route.Description FROM ((timetable INNER JOIN timeslottable ON timetable.slotid = timeslottable.slotid) INNER JOIN route ON timetable.routeid = route.routeid) WHERE timeslottable.day = ? order by timeslottable.time ";
         //$sql = "SELECT * FROM route";
         $stmt = $this->dbconnection->connect()->prepare($sql);
         $stmt->execute([$day]);
@@ -114,7 +114,7 @@ class QuerryDAO implements SuperDAO{
     }
 
     public function allSchedule(){
-        $sql = 'SELECT route.routeid,timeslottable.day,timeslottable.time,route.RouteName,route.Description FROM ((timetable INNER JOIN timeslottable ON timetable.slotid = timeslottable.slotid) INNER JOIN route ON timetable.routeid = route.routeid) ORDER BY timeslottable.day ';
+        $sql = 'SELECT route.routeid,timeslottable.day,timeslottable.time,route.RouteName,route.Description FROM ((timetable INNER JOIN timeslottable ON timetable.slotid = timeslottable.slotid) INNER JOIN route ON timetable.routeid = route.routeid) ORDER BY timeslottable.day,timeslottable.time  ';
        $stmt = $this->dbconnection->connect()->prepare($sql);
         $stmt->execute();
         // if ($stmt != null) {
@@ -306,7 +306,7 @@ class QuerryDAO implements SuperDAO{
   public function closeDutyRecord($did,$amount)
   {
 
-    $sql = "UPDATE dutyrecord,bus WHERE SET bus.state='closed', `CashAmount`=? WHERE dutyrecord.busid=bus.busid AND `dutyid`=?";
+    $sql = "UPDATE dutyrecord,bus SET bus.state='closed', `CashAmount`=? WHERE dutyrecord.busid=bus.busid AND `dutyid`=?";
     $stmt = $this->dbconnection->connect()->prepare($sql);
     $stmt->execute([$amount,$did]);
   }
@@ -602,76 +602,78 @@ public function getEmployeeByID($id){
 //-----------------------//
 //--------Engineer -Tharinda--------//
     //get complains which are only created
-public function getComplains(){
-    $sql= "SELECT complain.compid, bus.Numplate, complain.description, complain.date, complain.state FROM complain INNER JOIN dutyrecord ON complain.dutyid=dutyrecord.dutyid INNER JOIN bus ON dutyrecord.busid=bus.busid WHERE complain.state='created'";
-    $stmt=$this->dbconnection->connect()->prepare($sql);
-    $stmt->execute();
+    public function getComplains(){
+        $sql= "SELECT complain.compid, bus.Numplate, complain.description, complain.date, complain.state FROM complain INNER JOIN dutyrecord ON complain.dutyid=dutyrecord.dutyid INNER JOIN bus ON dutyrecord.busid=bus.busid WHERE complain.state='created'ORDER BY complain.compid";
+        $stmt=$this->dbconnection->connect()->prepare($sql);
+        $stmt->execute();
 
-    $results=$stmt->fetchAll();
-    if ($results==NULL){
-        return false;
+        $results=$stmt->fetchAll();
+        if ($results==NULL){
+            return false;
+        }
+        else{
+            return $results;
+            echo "done";
+        }
     }
-    else{
+    //get the workers who are free
+    public function getFreeWorkers(){
+        $sql= "SELECT empid,FirstName,Available,Designation FROM employee where Available='1' AND Designation='Worker'";
+        $stmt=$this->dbconnection->connect()->prepare($sql);
+        $stmt->execute();
+        $results=$stmt->fetchAll();
         return $results;
-        echo "done";
     }
-}
-     //get the workers who are free
-public function getFreeWorkers(){
-    $sql= "SELECT empid,FirstName,Available,Designation FROM employee where Available='1' AND Designation='Worker'";
-    $stmt=$this->dbconnection->connect()->prepare($sql);
-    $stmt->execute();
-    $results=$stmt->fetchAll();
-    return $results;
-}
-public function addworkertodb($compid,$workerid){
-    $sql="INSERT INTO workerassign(compid,empid)
-    VALUES ('$compid','$workerid')";
-    $stmt = $this->dbconnection->connect()->prepare($sql);
-    $stmt->execute();
-    $sql2="UPDATE complain SET state='processed' WHERE compid=$compid";
-    $stmt2 = $this->dbconnection->connect()->prepare($sql2);
-    $stmt2->execute();
-    $sql3="UPDATE employee SET Available='0' WHERE empid=$workerid";
-    $stmt3 = $this->dbconnection->connect()->prepare($sql3);
-    $stmt3->execute();
-}
-//get the complians which are in processed state
-public function getWorkerAddedComplain(){
-    $sql = "SELECT complain.compid,bus.Numplate,complain.description,complain.date,complain.state,.workerassign.empid FROM complain INNER JOIN workerassign on complain.compid=workerassign.compid INNER JOIN dutyrecord on complain.dutyid=dutyrecord.dutyid INNER JOIN bus on dutyrecord.busid=bus.busid WHERE complain.state='processed' ORDER BY complain.compid";
-    $stmt = $this->dbconnection->connect()->prepare($sql);
-    $stmt->execute();
-    $results=$stmt->fetchAll();
-    return $results;
-}
-public function closeComplainDb($compid){
-    $sql = "UPDATE complain SET state='closed' WHERE compid = ?";
-    $stmt = $this->dbconnection->connect()->prepare($sql);
-    $stmt->execute([$compid]);
-    $result = $stmt->fetch();
-    $sql2="SELECT compid,empid FROM workerassign WHERE compid=?";
-    $stmt2 = $this->dbconnection->connect()->prepare($sql);
-    return $result;
-}
-public function getAssignWorkers($compid){
-    $sql="SELECT compid,empid FROM workerassign WHERE compid=?";
-    $stmt = $this->dbconnection->connect()->prepare($sql);
-    $stmt->execute([$compid]);
-    $results=$stmt->fetchAll();
-    return $results;
-}
-
-public function freeTheWorker($empid){
-    $sql="UPDATE employee SET Available='1' WHERE empid = ?";
-    $stmt = $this->dbconnection->connect()->prepare($sql);
-    $stmt->execute([$empid]);
-}
-
-//change bus state as parked
-    public function busToRun($compid){
-        $sql="SELECT complain.compid, dutyrecord.dutyid, bus.busid,bus.Numplate FROM complain INNER JOIN dutyrecord ON complain.dutyid=dutyrecord.dutyid INNER JOIN bus ON dutyrecord.busid=bus.busid WHERE complain.compid=?";
+    //adding worker to worker assign data base, change compalin state to processed and employee state unavailable
+    public function addworkertodb($compid,$workerid){
+        $sql="INSERT INTO workerassign(compid,empid)
+        VALUES ('$compid','$workerid')";
+        $stmt = $this->dbconnection->connect()->prepare($sql);
+        $stmt->execute();
+        $sql2="UPDATE complain SET state='processed' WHERE compid=$compid";
+        $stmt2 = $this->dbconnection->connect()->prepare($sql2);
+        $stmt2->execute();
+        $sql3="UPDATE employee SET Available='0' WHERE empid=$workerid";
+        $stmt3 = $this->dbconnection->connect()->prepare($sql3);
+        $stmt3->execute();
+    }
+    //get the complians which are in processed state
+    public function getWorkerAddedComplain(){
+        $sql = "SELECT complain.compid,bus.Numplate,complain.description,complain.date,complain.state,.workerassign.empid,employee.FirstName FROM complain INNER JOIN workerassign on complain.compid=workerassign.compid INNER JOIN dutyrecord on complain.dutyid=dutyrecord.dutyid INNER JOIN bus on dutyrecord.busid=bus.busid INNER JOIN employee on workerassign.empid=employee.empid WHERE complain.state='processed'   ORDER BY complain.compid";
+        $stmt = $this->dbconnection->connect()->prepare($sql);
+        $stmt->execute();
+        $results=$stmt->fetchAll();
+        return $results;
+    }
+    public function closeComplainDb($obj){
+        $compid=$obj->getCompid();
+        $sql = "UPDATE complain SET state='closed' WHERE compid = ?";
         $stmt = $this->dbconnection->connect()->prepare($sql);
         $stmt->execute([$compid]);
+        $result = $stmt->fetch();
+        $sql2="SELECT compid,empid FROM workerassign WHERE compid=?";
+        $stmt2 = $this->dbconnection->connect()->prepare($sql);
+        return $result;
+    }
+    public function getAssignWorkers($obj){
+        $compid=$obj->getCompid();
+        $sql="SELECT compid,empid FROM workerassign WHERE compid=?";
+        $stmt = $this->dbconnection->connect()->prepare($sql);
+        $stmt->execute([$compid]);
+        $results=$stmt->fetchAll();
+        return $results;
+    }
+
+    public function freeTheWorker($empid){
+        $sql="UPDATE employee SET Available='1' WHERE empid = ?";
+        $stmt = $this->dbconnection->connect()->prepare($sql);
+        $stmt->execute([$empid]);
+    }
+
+    public function busToRun($obj){
+        $sql="SELECT complain.compid, dutyrecord.dutyid, bus.busid,bus.Numplate FROM complain INNER JOIN dutyrecord ON complain.dutyid=dutyrecord.dutyid INNER JOIN bus ON dutyrecord.busid=bus.busid WHERE complain.compid=?";
+        $stmt = $this->dbconnection->connect()->prepare($sql);
+        $stmt->execute([$obj->getCompid()]);
         $results=$stmt->fetchAll();
         foreach($results as $result){
             $sql2="UPDATE bus SET State='parked' WHERE busid=?";
@@ -680,6 +682,17 @@ public function freeTheWorker($empid){
         }
 
     }
+
+    //get details of a complain by id
+    public function giveComplainDetails($obj){
+        $compid=$obj->getCompid();
+        $sql="SELECT complain.compid,dutyrecord.dutyid,bus.busid,bus.Numplate FROM complain INNER JOIN dutyrecord ON complain.dutyid=dutyrecord.dutyid INNER JOIN bus ON dutyrecord.busid=bus.busid WHERE complain.compid=?";
+        $stmt = $this->dbconnection->connect()->prepare($sql);
+        $stmt->execute([$compid]);
+        $results=$stmt->fetchAll();
+        return $results;
+    }
+
 
 //------------End Tharinda Thamaranga--------------//
 

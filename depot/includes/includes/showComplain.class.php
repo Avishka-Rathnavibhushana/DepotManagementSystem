@@ -24,7 +24,7 @@ if (($_GET['compid']!="")&($_GET['task']=="selectRecord")){
                 <input type=\"text\" id=\"selected complain\" value=\"{$result[0]['compid']}\">
                 <input type=\"text\" id=\"selected bus\" value=\"{$result[0]['Numplate']}\">
             </form>
-            </div>";
+            </div>";      
 }
 
 //adding a worker to the complain

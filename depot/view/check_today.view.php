@@ -16,6 +16,13 @@ session_start();
       padding-left: 40%;
       font-size: 27px;
       text-decoration: underline;
+      margin-top: 15px;
+    }
+
+    table{
+      width: 75%!important;
+      margin: auto!important;
+      margin-top: 24px!important;
     }
     </style>
 
@@ -42,8 +49,8 @@ session_start();
         if (isset($_POST['cashier'])){
             echo "<div>
             <h1>Initiated Ticket Books</h1>
-            <table class=\"table table-bordered\">
-              <thead>
+            <table class=\"table table-hover col-md-12\">
+                <thead class=\"thead-dark\">
                   <tr>
                     <th>NumberPlate</th>
                     <th>Driver</th>
@@ -74,8 +81,8 @@ session_start();
 
               <div>
               <h1>Closed Duty Records</h1>
-              <table class=\"table table-bordered\">
-                <thead>
+              <table class=\"table table-hover col-md-12\">
+                  <thead class=\"thead-dark\">
                     <tr>
                       <th>NumberPlate</th>
                       <th>Driver</th>
@@ -106,8 +113,8 @@ session_start();
 
                 <div>
                 <h1>Created Complains</h1>
-                <table class=\"table table-bordered\">
-                  <thead>
+                <table class=\"table table-hover col-md-12\">
+                    <thead class=\"thead-dark\">
                       <tr>
                         <th>Employee</th>
                         <th>Driver</th>
@@ -137,8 +144,8 @@ session_start();
                 </div>
                 <div>
                 <h1>Created Paysheets</h1>
-                <table class=\"table table-bordered\">
-                  <thead>
+                <table class=\"table table-hover col-md-12\">
+                    <thead class=\"thead-dark\">
                       <tr>
                         <th>Employee</th>
                         <th>Designation</th>
@@ -176,8 +183,8 @@ session_start();
         elseif (isset($_POST['transporter'])){
             $name="This is engineer today";
         			 $fi = new FacadeInvoker();
-        		echo "<table class=\"table table-bordered\">
-                <thead>
+        		echo "<table class=\"table table-hover col-md-12\">
+                <thead class=\"thead-dark\">
                   <tr>
                     <th>Bus Number</th>
                     <th>Dispatch Time</th>
@@ -193,8 +200,8 @@ session_start();
         elseif (isset($_POST['clark'])){
              $fi = new FacadeInvoker();
 
-          echo "<table class=\"table table-bordered\">
-              <thead>
+          echo "<table class=\"table table-hover col-md-12\">
+              <thead class=\"thead-dark\">
                 <tr>
                   <th>Bus Number</th>
                   <th>Driver Name</th>
@@ -215,8 +222,8 @@ session_start();
         else{
           echo "<div>
           <h1>Initiated Ticket Books</h1>
-          <table class=\"table table-bordered\">
-            <thead>
+          <table class=\"table table-hover col-md-12\">
+              <thead class=\"thead-dark\">
                 <tr>
                   <th>NumberPlate</th>
                   <th>Driver</th>
@@ -247,8 +254,8 @@ session_start();
 
             <div>
             <h1>Closed Duty Records</h1>
-            <table class=\"table table-bordered\">
-              <thead>
+            <table class=\"table table-hover col-md-12\">
+                <thead class=\"thead-dark\">
                   <tr>
                     <th>NumberPlate</th>
                     <th>Driver</th>
@@ -279,8 +286,8 @@ session_start();
 
               <div>
               <h1>Created Complains</h1>
-              <table class=\"table table-bordered\">
-                <thead>
+              <table class=\"table table-hover col-md-12\">
+                  <thead class=\"thead-dark\">
                     <tr>
                       <th>Employee</th>
                       <th>Driver</th>
@@ -310,8 +317,8 @@ session_start();
               </div>
               <div>
               <h1>Created Paysheets</h1>
-              <table class=\"table table-bordered\">
-                <thead>
+              <table class=\"table table-hover col-md-12\">
+                  <thead class=\"thead-dark\">
                     <tr>
                       <th>Employee</th>
                       <th>Designation</th>

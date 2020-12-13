@@ -54,7 +54,7 @@
                         document.getElementById("dutyrecordtable").innerHTML = this.responseText;
                       }
                     };
-                    xhttp.open("GET", "../includes/loadRecords.php?name="+name+"&state=returned", true);
+                    xhttp.open("GET", "../includes/loadRecords.php?name="+name+"&state=arrived", true);
                     xhttp.send();
                   }
                 </script>
@@ -72,7 +72,7 @@
                     <?php
                       $factory = new ControllerFactory();
                       $cashierObj = $factory->getController("CASHIER");
-                      $results = $cashierObj->showDutyRecords("returned");
+                      $results = $cashierObj->showDutyRecords("arrived");
                       foreach ($results as $row){
                         echo "<tr onclick=\"displySelectedRec( {$row['dutyid']} )\">
                                 <td class=\"Numplate\">{$row['busid']}</td>
@@ -145,6 +145,7 @@
                     var amount = document.getElementById("amount").value;
                     var status = document.querySelector('input[name="state"]:checked').value;
 
+
                     if ((did=="notset") && (tktnum=="") && (amount=="")) {
                       document.getElementById("err").innerHTML = "<p>Select a record and enter ticket number and enter cash amount</p>";
                     }else if ((did!="notset") && (tktnum=="") && (amount=="")) {
@@ -156,14 +157,15 @@
                     }else{
                       document.getElementById("err").innerHTML = "";
                       xhttp = new XMLHttpRequest();
-                      /*xhttp.onreadystatechange = function() {
+                      xhttp.onreadystatechange = function() {
                         if (this.readyState == 4 && this.status == 200) {
                           document.getElementById("showSelected").innerHTML = this.responseText;
                         }
-                      };*/
+                        //window.location.reload();
+                      };
                       xhttp.open("GET", "../includes/submitForm.php?dutyId="+did+"&bookId="+bookid+"&tktnum="+tktnum+"&amount="+amount+"&busStatus="+status+"&page=dRecClose", true);
                       xhttp.send();
-                      window.location.reload();
+
                     }
                   }
                 </script>

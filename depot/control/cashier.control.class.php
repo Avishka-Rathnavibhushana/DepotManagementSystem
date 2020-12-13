@@ -129,9 +129,10 @@
   //from submitForm.php
   public function submitComplainForm($did,$complain)
   {
+    $querrydaoObj = new QuerryDAO();
     $complainDAO = new ComplainDAO();
-    $querrydaoObj->insertComplain(new ComplainDTO("",$did,$complain,"",'created'));
-
+    $complainDAO->save(new ComplainDTO("",$did,$complain,"",'created'));
+    echo "{$did}";
     $result = $querrydaoObj->getBusId($did);
     $querrydaoObj->updateBusStatus($result[0]['busid'],"broken");
   }

@@ -76,7 +76,7 @@ class TranspoterControl implements Facademaker{
 
 		foreach ($out as $row) {
 			# code...
-			echo  "<tr><td>{$row['numplate']}</td><td>{$row['DispatchTime']}</td><td>{$row['time']}</td><td>{$row['dieselusage']}</td></tr>";
+			echo  "<tr><td>{$row['Numplate']}</td><td>{$row['DispatchTime']}</td><td>{$row['time']}</td><td>{$row['dieselusage']}</td></tr>";
 
 		}
 

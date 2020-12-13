@@ -34,7 +34,7 @@ class ClerkControl implements Facademaker{
 
 			$this->dutyDAO->save($DTObj1);
 			$this->querryDAO->updateBusDriCon($busNO,$driver,$conductor);
-			//header('location:../view/clerk.view.php?error=no');
+			header('location:../view/clerk.view.php?error=no');
 		}
 
 	}

@@ -1,15 +1,13 @@
 <?php
 
-include "FacadeMaker.inf.php";
+//include "FacadeMaker.inf.php";
 
-class SoControl implements FacadeMaker{
+class SoControl{
     public $attendanceT;
     public $querry;
     public function __construct(){
         $this->attendanceT = new AttendancerecordDAO();
-        $this->visitorT=new VisitorDAO();
         $this->querry = new QuerryDAO();
-
     }
 
     public function showusers($id){
@@ -40,10 +38,8 @@ class SoControl implements FacadeMaker{
 
     //marking attendance
     public function markattendance($obj){
-
         //check whether it is an valid id
         if ($this->querry->checkID_employee($obj->getEmpid())){
-
             //check whether there is already a unleaved attendance record(true if not have live attended record)
             $res=$this->attendanceT->search($obj);
 
@@ -77,16 +73,14 @@ class SoControl implements FacadeMaker{
             echo"Incorrect ID";
         }
     }
-
     //search emplyee by id and return the details to display
     public function displayEmployeeById($empid){
         return $this->querry->getEmployeeByID($empid);
     }
-
     //give the attended worker list to the admin on a curresponding date
     public function givetoadmin(){
         //funcion to call
-        $display="<table>";
+        $display="<table class=\"table table-bordered\">";
         $attended=$this->querry-> getAttendedEmployee();
         $display.="<tr><th>Employee</th><th>ON_time</th></tr>";
 
@@ -101,32 +95,6 @@ class SoControl implements FacadeMaker{
 
     }
 
-    //add a new visitor
-    public function addNewVisitor($obj){
-        $this->visitorT->save($obj);
-    }
-
-    //show added visitors
-    public function visitingVisitors(){
-
-        $attended=$this->visitorT-> getAll();
-        $display="";
-
-        foreach($attended as $row){
-            $id=$row['national_id'];
-            $display.="<tr onclick=\"selectedVisitor('{$row['national_id']}')\">";
-            $display.="<td style=\"width:60%\">{$row['first_name']}</td>";
-            $display.="<td>{$row['national_id']}</td>";
-            $display.="</tr>";
-        }
-
-        return $display;
-    }
-
-    //leave a visitor
-    public function visitorLeave($obj){
-        $this->visitorT->update($obj);
-    }
 }
 
 

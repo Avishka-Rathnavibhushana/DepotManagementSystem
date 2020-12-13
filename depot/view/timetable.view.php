@@ -61,7 +61,7 @@ $showAll =  $timetableCtrl->execute("All");
 	        <input type="text" class="form-control mr-sm-2" id="myInput" onkeyup="myFunction()" placeholder="Enter Your Destination" title="Type in a name" style="width: 300px;">
 
 	          <!-- <input class="form-control mr-sm-2" type="text" placeholder="Enter Your Destination" > -->
-	          <button class="btn btn-success" type="submit">Search</button>
+	          <!-- <button class="btn btn-success" type="submit">Search</button> -->
 	      </form>
 	    </div>
 		<div class="container" style="margin-top: 10px;">
@@ -69,10 +69,10 @@ $showAll =  $timetableCtrl->execute("All");
 				  <table class="table table-bordered" id="myTable">
 				    <thead>
 				      <tr>
-				        <th>Destination</th>
-				        <th>Day</th>
-				        <th>Dispatch Time</th>
-				        <th>Route</th>
+				        <th style="text-align: center;">Destination</th>
+				        <th style="text-align: center;">Day</th>
+				        <th style="text-align: center;">Dispatch Time</th>
+				        <th style="text-align: center;">Route</th>
 				      </tr>
 				    </thead>
 				    <tbody>

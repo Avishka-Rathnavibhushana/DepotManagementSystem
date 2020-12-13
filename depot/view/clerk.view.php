@@ -105,10 +105,10 @@ session_start();
 				<?php
 					if (isset($_GET['error'])) {
 						if ($_GET['error']=='no') {
-							echo "<p>Add New Duty</p>";
+							echo "<p style=\"color: green;\">New Duty Added</p>";
 						}
 						else{
-							echo "<p>Sellect All Values</p>";
+							echo "<p style=\"color: red;\">Sellect All Values</p>";
 						}
 
 					}

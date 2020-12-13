@@ -54,7 +54,7 @@
                         document.getElementById("dutyrecordtable").innerHTML = this.responseText;
                       }
                     };
-                    xhttp.open("GET", "../includes/loadRecords.php?name="+name+"&state=closed", true);
+                    xhttp.open("GET", "../includes/loadRecords.php?name="+name+"&state=unavailable", true);
                     xhttp.send();
                   }
                 </script>
@@ -72,7 +72,7 @@
                     <?php
                       $factory = new ControllerFactory();
                       $cashierObj = $factory->getController("CASHIER");
-                      $results = $cashierObj->showDutyRecords("closed");
+                      $results = $cashierObj->showDutyRecords("unavailable");
                       foreach ($results as $row){
                         echo "<tr onclick=\"displySelectedRec( {$row['dutyid']} )\">
                                 <td class=\"Numplate\">{$row['busid']}</td>
@@ -128,14 +128,16 @@
                     }else{
                       document.getElementById("err").innerHTML = "";
                       xhttp = new XMLHttpRequest();
-                      /*xhttp.onreadystatechange = function() {
+                      xhttp.onreadystatechange = function() {
                         if (this.readyState == 4 && this.status == 200) {
-                          document.getElementById("showSelected").innerHTML = this.responseText;
+                          document.getElementById("err").innerHTML = this.responseText;
+                          //window.location.reload();
                         }
-                      };*/
+                      };
+
                       xhttp.open("GET", "../includes/submitForm.php?dutyId="+did+"&complainText="+complainText+"&page=complainCreate", true);
                       xhttp.send();
-                      //window.location.reload();
+
                     }
                   }
                 </script>
